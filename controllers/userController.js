@@ -44,7 +44,7 @@ module.exports = {
 
       
       deleteUser(req, res) {
-        CouteUser.findOneAndDelete({ _id: req.params.userId })
+        User.findOneAndDelete({ _id: req.params.userId })
           .then((user) =>
             !user
               ? res.status(404).json({ message: 'No user with that ID' })
@@ -69,7 +69,7 @@ module.exports = {
           .catch((err) => res.status(500).json(err));
       },
 
-      
+
       addFriend(req, res) {
         User.findOneAndUpdate(
           { _id: req.params.userId },
