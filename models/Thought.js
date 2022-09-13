@@ -10,6 +10,7 @@ const reactionSchema = new Schema({
       createdAt: {
         type: Date,
         default: Date.now,
+        get: v => new Date(v)
       },
     },
 );
@@ -19,6 +20,7 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
+        get: v => new Date(v)
       },
       username: [{ type: Schema.Types.ObjectId, ref: 'user' }],
       reactions: [reactionSchema]
