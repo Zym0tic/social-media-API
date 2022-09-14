@@ -9,7 +9,7 @@ module.exports = {
             const userObj = {
               users
             };
-            return res.json(thoughtrObj);
+            return res.json(thoughtObj);
           })
           .catch((err) => {
             console.log(err);
@@ -21,7 +21,7 @@ module.exports = {
         Thought.findOne({ _id: req.params.thoughtId })
           .select('-__v')
           .then(async (thought) =>
-            !user
+            !thought
               ? res.status(404).json({ message: 'No thought with that ID' })
               : res.json({
                   Thought
