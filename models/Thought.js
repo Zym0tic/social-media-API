@@ -22,7 +22,7 @@ const thoughtSchema = new Schema({
         default: Date.now,
         get: v => new Date(v)
       },
-      username: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+      userName: { type: String, unique: true, required: true, trim: true },
       reactions: [reactionSchema]
 },
 {
