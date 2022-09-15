@@ -8,7 +8,7 @@ module.exports = {
   getThoughts(req, res) {
     Thought.find()
       .then(async (users) => {
-        const userObj = {
+        const thoughtObj = {
           users,
         };
         return res.json(thoughtObj);
@@ -60,9 +60,20 @@ module.exports = {
   // delete thought
 
   deleteThought(req, res) {
-    Thought.findOneAndDelete({ _id: req.params.thoughtId }).catch((err) =>
-      res.status(500).json(err)
-    );
+    Thought.findOneAndRemove({ _id: req.params.thoughtId })
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: 'No such thought exists' })
+          : Reaction.findOneAndUpdate(
+              { thoughts: req.params.thoughtId },
+              { $pull: { students: req.params.reactionId } },
+              { new: true }
+            )
+      )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
   },
 
   // update thought
@@ -84,7 +95,7 @@ module.exports = {
 // add reaction
 
   addReaction(req, res) {
-    console.log("You are adding an assignment");
+    console.log("You are adding a reaction");
     console.log(req.body);
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
