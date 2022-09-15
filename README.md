@@ -22,7 +22,7 @@
 
   Use for a basic social media site back end 
 
-  here is a walkthrough video of it being used: https://youtu.be/KIoJmcswWs0
+  here is a walkthrough video of it being used: https://www.youtube.com/watch?v=Fw1jRLKHLxs
 
 
   ## Contribution Guidelines 
